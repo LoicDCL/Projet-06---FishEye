@@ -3,13 +3,16 @@
 }
 
 .photograph-header {
+    display: flex;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .contact_button {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
     color: white;
     padding: 11px;
@@ -19,6 +22,34 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    order: 2;
+}
+
+.contact_button:hover {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #DB8876;
+    border-radius: 5px;
+    cursor: pointer;
+    order: 2;
+}
+
+.submit_button {
+    font-size: 15px;
+    color: white;
+    padding: 10px;
+    width: 120px;
+    height: 40px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    order: 2;
 }
 
 .modal {
@@ -43,9 +74,9 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 34px;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
 }
 
 form {
@@ -65,7 +96,6 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
 }
 
 form input {
@@ -73,4 +103,561 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.card {
+    display:block;
+    text-align:center;
+    order: 3;
+}
+
+.cardtext {
+    order: 1;
+}
+
+.card__avatar{ 
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.card__img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+article h2 {
+    color: #D3573C;
+    font-size: 34px;
+    margin-bottom: 0;
+}
+
+.card__location {
+    color: #901C1C;
+    font-size: 13px;
+    margin: 0;
+}
+
+.card__tagline {
+    color: #000;
+    font-size: 10px;
+    margin: 0;
+}
+
+.card__price {
+    color: #757575;
+    font-size: 9px;
+    margin: 0;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem 4rem 6rem;
+}
+
+.media-card { 
+    display: grid;
+    gap: .5rem; 
+}
+
+.media-card img, .media-card video, .media-placeholder {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #eee;
+    display: block;
+}
+
+.media-placeholder { 
+    display: grid; 
+    place-items: center; 
+    color: #666; 
+    font-size: .95rem; 
+}
+
+.media-caption {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.media-title { 
+    font-size: 20px;
+    color: #901C1C;
+}
+
+.media-price { 
+    color: #757575; 
+}
+
+.rate-badge {
+    position: fixed;
+    bottom: -5px; 
+    right: 30px;
+    background: #DB8876; 
+    color: #000;
+    padding: .75rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* =============================================== Lightbox ======================================================== */
+.lightbox[hidden] {
+    display: none; 
+}
+
+.lightbox {
+    position: fixed; inset: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+}
+
+.lightbox__inner {
+    max-width: min(90vw, 1200px);
+    max-height: 90vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 12px;
+}
+
+.lightbox__media {
+    display: grid;
+    place-items: center;
+    max-height: 80vh;
+}
+
+.lightbox__media img,
+.lightbox__media video {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+    background: #111;
+}
+
+.lightbox__caption {
+    color: #901C1C;
+    margin: 0;
+    text-align: left;
+    font-size: 20px;
+}
+
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+    position: absolute;
+    top: 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0);
+    color: #901C1C;
+    font-size: 75px;
+    line-height: 75px;
+    cursor: pointer;
+}
+
+.lightbox__close {
+    right: 16px; 
+}
+
+.lightbox__prev {
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox__next {
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox__close:focus,
+.lightbox__prev:focus,
+.lightbox__next:focus {
+    outline: 2px solid #DB8876;
+    outline-offset: 2px;
+}
+/* ================================================================================================================= */
+
+/* Légende des cartes : titre + like */
+.media-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: #901C1C;
+    font-size: 20px;
+}
+
+.heart {
+    font-size: 22px;
+}
+
+/* Cartouche bas de page (tu as déjà .rate-badge, on garde la base) */
+.rate-badge.photographer-stats {
+    font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  font-weight: 600;
+}
+
+/* ---- Barre de tri ---- */
+.sortbar {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    margin: 24px 100px 8px;
+    font-weight:600;
+}
+.sort { 
+    position: relative;
+    display:inline-block;
+}
+
+.sort__button {
+    min-width: 190px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:.75rem 1rem;
+    border:0;
+    border-radius:8px;
+    background:#901C1C;
+    color:#fff;
+    cursor:pointer;
+    font: inherit;
+}
+
+.sort__chevron { 
+    transition: transform .15s ease;
+}
+
+.sort[data-open="true"] .sort__chevron { 
+    transform: rotate(180deg);
+}
+
+.sort__list[hidden] { display:none; }
+.sort__list {
+    position:absolute;
+    top: calc(100% + 6px);
+    left:0;
+    z-index: 20;
+    min-width: 190px;
+    margin:0;
+    padding:.5rem 0;
+    list-style:none;
+    background:#901C1C;
+    color:#fff;
+    border-radius:8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    outline: none;
+}
+
+.sort__list [role="option"] {
+    padding:.5rem 1rem;
+    cursor:pointer;
+    position: relative; 
+}
+
+.sort__list [role="option"] + [role="option"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background: rgba(255, 255, 255, .6);
+}
+
+/* ============================================================================
+   MODALE DE CONTACT - Styles conformes à la maquette Figma
+   ============================================================================ */
+
+/* Overlay de la modale (fond semi-transparent) */
+#contact_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Conteneur de la modale */
+.modal {
+    position: relative;
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin: 40px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================================
+   HEADER DE LA MODALE
+   ============================================================================ */
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.modal__title-wrapper {
+    flex: 1;
+}
+
+.modal__header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+    color: #000;
+    line-height: 1;
+}
+
+.modal__photographer-name {
+    font-size: 34px;
+    font-weight: normal;
+    margin: 0;
+    color: #000;
+    line-height: 1;
+}
+
+/* Bouton de fermeture */
+.modal__close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.modal__close:hover {
+    transform: scale(1.1);
+}
+
+.modal__close:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.modal__close img {
+    width: 30px;
+    height: 30px;
+}
+
+/* ============================================================================
+   FORMULAIRE
+   ============================================================================ */
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+/* Groupe de champ */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Labels */
+form label {
+    color: #312E2E;
+    font-size: 20px;
+    font-weight: normal;
+    display: block;
+}
+
+/* Champs de saisie */
+form input,
+form textarea {
+    width: 90%;
+    padding: 18px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #fff;
+    color: #000;
+    transition: box-shadow 0.2s ease;
+}
+
+form input {
+    height: 10px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 170px;
+    line-height: 1.3;
+}
+
+/* Focus sur les champs */
+form input:focus,
+form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #901C1C;
+}
+
+/* Champs en erreur */
+form input.error,
+form textarea.error {
+    border: 2px solid #c00;
+    box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+/* Message d'erreur */
+.error-message {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 18px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Bouton d'envoi */
+form .submit_button {
+    margin-top: 12px;
+    align-self: flex-start;
+    font-size: 18px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media screen and (max-width: 768px) {
+    .modal {
+        padding: 32px 24px 24px;
+        margin: 20px auto;
+    }
+
+    .modal__header h2,
+    .modal__photographer-name {
+        font-size: 48px;
+    }
+
+    form label {
+        font-size: 28px;
+    }
+
+    form input,
+    form textarea {
+        font-size: 24px;
+    }
+
+    form input {
+        height: 56px;
+    }
+
+    form textarea {
+        min-height: 120px;
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #contact_modal {
+        padding: 10px;
+    }
+
+    .modal {
+        padding: 24px 20px 20px;
+        margin: 10px auto;
+    }
+
+    .modal__header h2,
+    .modal__photographer-name {
+        font-size: 36px;
+    }
+
+    form label {
+        font-size: 24px;
+    }
+
+    form input,
+    form textarea {
+        font-size: 20px;
+    }
+
+    .contact_button {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .error-message {
+        font-size: 14px;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+/* Animation d'ouverture de la modale */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#contact_modal[style*="display: block"] {
+    animation: modalFadeIn 0.3s ease;
+}
+
+#contact_modal[style*="display: block"] .modal {
+    animation: modalSlideIn 0.3s ease;
 }
