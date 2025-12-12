@@ -39,10 +39,10 @@ function sortItems(list, key) {
 
 function applySortAndRender(key) {
     currentSort = key;
-    const sorted = sortItems(items, key);
+    const sorted = sortItems(items, currentSort);
     buildGallery(sorted);
     setupLightbox(); // Re-branche la lightbox (DOM modifié)
-    updateSortUI(key);
+    updateSortUI(currentSort);
 }
 
 function updateSortUI(key) {
@@ -70,6 +70,7 @@ function mountSortControl() {
     const btn = document.getElementById("sort-button");
     const list = document.getElementById("sort-list");
     if (!wrapper || !btn || !list) return;
+
     function open() {
         wrapper.dataset.open = "true";
         btn.setAttribute("aria-expanded", "true");
@@ -77,19 +78,23 @@ function mountSortControl() {
         const selected = list.querySelector("[aria-selected='true']") || list.firstElementChild;
         if (selected) selected.focus();
     }
+
     function close() {
         wrapper.dataset.open = "false";
         btn.setAttribute("aria-expanded", "false");
         list.hidden = true;
         btn.focus();
     }
+
     function toggle() {
         wrapper.dataset.open === "true" ? close() : open();
     }
+
     btn.addEventListener("click", (e) => {
         e.preventDefault();
         toggle();
     });
+
     list.addEventListener("click", (e) => {
         const option = e.target.closest("[role='option']");
         if (!option) return;
@@ -105,47 +110,17 @@ function mountSortControl() {
         }
     });
 
-    // Eléments focusable page
-    function getPageFocusables() {
-    if (!pageRoot) return [];
-    return Array.from(
-        pageRoot.querySelectorAll(
-            "a[href], button, input, select, textarea, [tabindex]:not([tabindex='-1'])"
-        )
-    ).filter(el => !el.hasAttribute("disabled") && el.offsetParent !== null);
-    }
-
-
-    // Le piège à focus (tab)
-    function trapPageFocus(e) {
-    if (e.key !== "Tab") return;
-    // Si une modale est ouverte, pas touche
-    const lightboxOpen = !document.getElementById("lightbox")?.hidden;
-    const contactOpen = document.getElementById("contact_modal")?.getAttribute("aria-hidden") === "false";
-    if (lightboxOpen || contactOpen) return;
-    const focusables = getPageFocusables();
-    if (!focusables.length) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-    }
-}
-
-
     // Navigation clavier (Liste déroulante)
     list.addEventListener("keydown", (e) => {
         const options = Array.from(list.querySelectorAll("[role='option']"));
         const currentIndex = options.indexOf(document.activeElement);
+
         if (e.key === "Escape") {
             e.preventDefault();
             close();
             return;
         }
+
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             const activeOption = document.activeElement;
@@ -155,26 +130,29 @@ function mountSortControl() {
             }
             return;
         }
+
         if (e.key === "ArrowDown") {
             e.preventDefault();
             const nextOption = options[currentIndex + 1] || options[currentIndex];
             nextOption.focus();
         }
+
         if (e.key === "ArrowUp") {
             e.preventDefault();
             const prevOption = options[currentIndex - 1] || options[currentIndex];
             prevOption.focus();
         }
+
         if (e.key === "Home") {
             e.preventDefault();
             options[0].focus();
         }
+
         if (e.key === "End") {
             e.preventDefault();
             options[options.length - 1].focus();
         }
     });
-
 
     // Fermeture au clic extérieur
     document.addEventListener("click", (e) => {
@@ -184,6 +162,42 @@ function mountSortControl() {
     });
 }
 
+
+// Eléments focusable page
+function getPageFocusables() {
+    if (!pageRoot) return [];
+    return Array.from(
+        pageRoot.querySelectorAll(
+            "a[href], button, input, select, textarea, [tabindex]:not([tabindex='-1'])"
+        )
+    ).filter(el => !el.hasAttribute("disabled") && el.offsetParent !== null);
+}
+
+
+// Le piège à focus (tab)
+function trapPageFocus(e) {
+    if (e.key !== "Tab") return;
+
+    const lightboxOpen = !document.getElementById("lightbox")?.hidden;
+    const contactOpen =
+        document.getElementById("contact_modal")?.getAttribute("aria-hidden") === "false";
+
+    if (lightboxOpen || contactOpen) return;
+
+    const focusables = getPageFocusables();
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+    }
+}
 
 // AFFICHAGE DES DONNÉES
 function updateDailyRate(photographer, totalLikes = 0) {
@@ -209,7 +223,6 @@ function buildGallery(mediaList) {
     });
     grid.appendChild(fragment);
 }
-
 
 // HEADER PHOTOGRAPHE
 async function mountPhotographHeader() {
